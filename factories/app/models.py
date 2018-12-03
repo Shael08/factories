@@ -35,9 +35,9 @@ class depot(models.Model):
         return self.name
 
 
-class factory_to_costumer_shipping(models.Model):
-    factory_fk = models.ForeignKey(factory , on_delete=models.CASCADE);
-    customer_fk = models.ForeignKey(customer , on_delete=models.CASCADE);
+class factory_to_customer_shipping(models.Model):
+    factory_fk = models.ForeignKey(factory, on_delete=models.CASCADE);
+    customer_fk = models.ForeignKey(customer, on_delete=models.CASCADE);
     cost = models.FloatField(blank=True, null=True)
     quantity = models.FloatField(blank=True, null=True)
 
@@ -51,7 +51,7 @@ class factory_to_costumer_shipping(models.Model):
         return 'Shipping from %s to %s' % (str(self.factory_fk.name), str(self.customer_fk.name))
 
 class factory_to_depots_shipping(models.Model):
-    factory_fk = models.ForeignKey(factory , on_delete=models.CASCADE);
+    factory_fk = models.ForeignKey(factory, on_delete=models.CASCADE);
     depot_fk = models.ForeignKey(depot, on_delete=models.CASCADE);
     cost = models.FloatField(blank=True, null=True)
     quantity = models.FloatField(blank=True, null=True)
@@ -65,9 +65,9 @@ class factory_to_depots_shipping(models.Model):
     def __str__(self):
         return 'Shipping from %s to %s' % (str(self.factory_fk.name), str(self.depot_fk.name))
 
-class depot_to_costumer_shipping(models.Model):
-    depot_fk = models.ForeignKey(depot , on_delete=models.CASCADE);
-    customer_fk = models.ForeignKey(customer , on_delete=models.CASCADE);
+class depot_to_customer_shipping(models.Model):
+    depot_fk = models.ForeignKey(depot, on_delete=models.CASCADE);
+    customer_fk = models.ForeignKey(customer, on_delete=models.CASCADE);
     cost = models.FloatField(blank=True, null=True)
     quantity = models.FloatField(blank=True, null=True)
 

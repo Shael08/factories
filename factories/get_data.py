@@ -19,9 +19,17 @@ factories = [ record for record in cursor ]
 cursor.execute('select * from app_depot')
 depots = [ record for record in cursor ]
 
+cursor.execute('select * from app_customer')
+customers = [ record for record in cursor ]
+
 cursor.execute('select * from app_factory_to_depots_shipping')
 factory_to_depot_raw = [ record for record in cursor ]
 
+cursor.execute('select * from app_factory_to_costumer_shipping')
+factory_to_customer_raw = [ record for record in cursor ]
+
+cursor.execute('select * from app_depot_to_costumer_shipping')
+depot_to_customer_raw = [ record for record in cursor ]
 
 def factoryid(name):
     withthisname = [ r for r in filter(lambda x: x['name'] == name, factories)]
@@ -37,7 +45,15 @@ def depotid(name):
     else:
         return(None)
 
+def customerid(name):
+    withthisname = [ r for r in filter(lambda x: x['name'] == name, customers)]
+    if len(withthisname)>0:
+        return(withthisname[0]['id'])
+    else:
+        return(None)
+
 big_number=999999999999
+
 factory_names = [ f['name'] for f in factories ]
 depot_names = [ f['name'] for f in depots ]
 #valahogy igy kene: factory_to_depot_cost[factoryname][depotname]
@@ -55,4 +71,5 @@ problem = pulp.LpProblem("DistributionProblem", pulp.LpMinimize)
 
 transp_F_D = pulp.LpVariable.dicts("F_D", (factory_names, depot_names), 0)
 
-print(transp_F_D)
+
+
